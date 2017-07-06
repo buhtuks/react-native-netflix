@@ -2,7 +2,9 @@ import React, {Component} from 'react'
 import {
     Text,
     View,
-    StyleSheet
+    StyleSheet,
+    ScrollView,
+    Container,
 } from 'react-native'
 
 import {connect} from 'react-redux'
@@ -27,7 +29,7 @@ class App extends Component {
     }
 
     static navigationOptions = {
-        headerVisible: false
+        header: null,
     }
 
     toggle(){
@@ -71,7 +73,9 @@ class App extends Component {
                     onChange={(isOpen) => this.updateMenu(isOpen)}
                     style={{flex: 1}}
                 >
-                    <View style={[{flex: 1}, styles.container]}>
+                <View style={[{flex: 1}, styles.container]}>
+                    <ScrollView style={{flex: 1}}>
+                        <View style={[{flex: 1}, styles.container]}>
                         <Header navigation={this.props.navigation} toggle={this.toggle.bind(this)} />
                         {this.state.itemSelected == 'Home' ? <View style={{flex: 1}}>
                             <Slide />
@@ -85,6 +89,8 @@ class App extends Component {
                             item={this.state.itemSelected}
                         />}
                     </View>
+                    </ScrollView>
+                </View>
                 </SideMenu>
             </View>
         )
